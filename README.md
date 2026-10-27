@@ -181,12 +181,12 @@ El resultado son **45 tablas** (las claves primarias van entre paréntesis):
 
 | Bloque | Tablas de entidad | Tablas de relación N:M o ternaria | Catálogos |
 | --- | --- | --- | --- |
-| Personas | usuario (id), empleado (usuario_id), usuario_cliente (usuario_id), cliente (id), direccion_entrega (cliente_id, num) | — | puesto, forma_pago |
+| Personas | usuario (id), empleado (usuario_id), usuario_cliente (usuario_id), cliente (id), direccion_entrega (cliente_id, num) | - | puesto, forma_pago |
 | Catálogo y compras | producto (id), materia_prima (id), proveedor (id), alergeno (id) | receta (producto_id, materia_prima_id), proveedor_materia_prima (proveedor_id, materia_prima_id), materia_prima_alergeno (materia_prima_id, alergeno_id) | categoria_producto, unidad_medida, tipo_iva, tipo_conservacion |
 | Stock y lotes | lote_mp (id), lote_producto (codigo_lote), ajuste_stock (id) | consumo (codigo_lote, lote_mp_id) | motivo_ajuste |
 | Producción | maquina (id), orden_produccion (id) | producto_tipo_maquina (producto_id, paso, tipo_maquina), procesado_en (codigo_lote, paso), elabora (codigo_lote, empleado_id), plan_paso (orden_id, paso) | tipo_maquina |
-| Pedidos y reparto | pedido (num_pedido), vehiculo (matricula), ruta (id) | linea_pedido (num_pedido, producto_id), servicio_lote (num_pedido, codigo_lote), entrega (ruta_id, num_pedido), vehiculo_conservacion (vehiculo, conservacion) | — |
-| Personal | turno (id), tarea (id) | asignacion_turno (empleado_id, fecha, turno_id) | — |
+| Pedidos y reparto | pedido (num_pedido), vehiculo (matricula), ruta (id) | linea_pedido (num_pedido, producto_id), servicio_lote (num_pedido, codigo_lote), entrega (ruta_id, num_pedido), vehiculo_conservacion (vehiculo, conservacion) | - |
+| Personal | turno (id), tarea (id) | asignacion_turno (empleado_id, fecha, turno_id) | - |
 | Facturación | factura (id), linea_factura (factura_id, num), empresa (id) | factura_pedido (num_pedido) | serie_factura |
 
 Dos detalles del paso a tablas que merece la pena señalar:
