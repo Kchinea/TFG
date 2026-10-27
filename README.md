@@ -212,14 +212,6 @@ Dos detalles del paso a tablas que merece la pena señalar:
 
 ## 9. Siguientes pasos y dudas
 
-**Plan de trabajo:**
-
-1. Cerrar el modelo entidad-relación con las observaciones del tutor.
-2. Implementar la base de datos en PostgreSQL con sus restricciones, vistas y funciones, y unas pruebas que demuestren que las reglas se cumplen.
-3. Desarrollar el backend (API) sobre la base de datos.
-4. Desarrollar el portal B2B y la aplicación interna.
-5. Desplegar todo con Docker y redactar la memoria.
-
 **Ampliaciones que se están valorando:** un apartado de métricas (escandallos, margen por producto, coste de las mermas), el fichaje y firma de horas por parte de los empleados, y hojas de producción diarias rellenadas desde la aplicación.
 
 **Dudas sobre las que me gustaría su opinión:**
