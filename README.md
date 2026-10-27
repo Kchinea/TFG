@@ -58,15 +58,6 @@ Se elige una base de datos **relacional** porque los datos están muy conectados
 
 ![Diagrama entidad-relación en notación Chen](chen_tfg.png)
 
-El diagrama está en **notación Chen**:
-
-- **Rectángulo:** entidad. **Doble rectángulo:** entidad débil, que no existe sin su propietaria (DIRECCIÓN_ENTREGA sin su CLIENTE, LÍNEA_FACTURA sin su FACTURA).
-- **Rombo:** relación, nombrada con un verbo para que se lea como una frase: "un PROVEEDOR *suministra* MATERIA_PRIMA".
-- **Óvalo:** atributo. Subrayado si forma la clave.
-- **(mín, máx)** junto a cada entidad: cuántas veces participa una ocurrencia en la relación. Por ejemplo, un PEDIDO se entrega en (1,1) direcciones y una DIRECCIÓN recibe (0,n) pedidos.
-- **Jerarquía:** USUARIO es superclase de EMPLEADO y USUARIO_CLIENTE (total y disjunta: todo usuario es exactamente uno de los dos).
-
-El modelo tiene 30 entidades y 44 relaciones, agrupadas en siete bloques que se corresponden con los módulos del ERP.
 
 ## 5. Entidades y por qué existen
 
@@ -139,7 +130,7 @@ No se repiten aquí las 44: se explican las que deciden cómo funciona el sistem
 
 | Relación | Entre | Cardinalidad | Por qué |
 | --- | --- | --- | --- |
-| recepciona | PROVEEDOR, MATERIA_PRIMA y LOTE_MP | Ternaria; cada lote (1,1) | Un lote de MP es de una materia prima y lo trajo un proveedor concreto. Hace falta saber los dos para retirar producto ante una alerta. |
+| recepciona | PROVEEDOR, MATERIA_PRIMA y LOTE_MP | Ternaria; cada lote es de una MP y un proveedor | Un lote de MP es de una materia prima y lo trajo un proveedor concreto. Hace falta saber los dos para retirar producto ante una alerta. |
 | consume | LOTE_MP – LOTE_PRODUCTO | N:M con cantidad | Un lote fabricado usa varios lotes de MP (harina de dos sacos distintos) y un lote de MP alimenta varias tandas. Es el paso **hacia atrás** que exige la ley. |
 | sirve | LOTE_PRODUCTO – PEDIDO | N:M con cantidad | Un pedido puede servirse con dos lotes y un lote se reparte entre muchos clientes. Es el paso **hacia delante**. |
 | procesado en | LOTE_PRODUCTO – MÁQUINA | N:M con paso, inicio y fin | Un lote pasa por varias máquinas en orden. Si sale un lote defectuoso, se cruza con las averías. |
