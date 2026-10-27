@@ -205,19 +205,19 @@ Dos detalles del paso a tablas que merece la pena señalar:
 
 ## 8. Decisiones de diseño principales
 
-**D1. Configurable, dirigido por datos.** Máquinas, recetas, productos y empleados son *filas*, no tablas ni columnas. Las listas que podrían ir fijas en el código (puestos, formas de pago, tipos de máquina, tipos de IVA) son tablas de catálogo que la empresa amplía desde la aplicación. Se descartaron un modelo multiempresa (demasiado coste para una necesidad que no existe hoy) y el modelo genérico entidad-atributo-valor, porque pierde los tipos y las claves foráneas, que son justo las garantías que se buscan.
+**1. Configurable, dirigido por datos.** Máquinas, recetas, productos y empleados son *filas*, no tablas ni columnas. Las listas que podrían ir fijas en el código (puestos, formas de pago, tipos de máquina, tipos de IVA) son tablas de catálogo que la empresa amplía desde la aplicación. Se descartaron un modelo multiempresa (demasiado coste para una necesidad que no existe hoy) y el modelo genérico entidad-atributo-valor, porque pierde los tipos y las claves foráneas, que son justo las garantías que se buscan.
 
-**D2. El stock se calcula, no se guarda.** Una columna "stock" que se sobrescribe pierde la historia y acaba descuadrándose. El stock de cada lote se obtiene de sus movimientos: lo recibido o fabricado, menos lo consumido o servido, más los ajustes. Así nunca contradice a los datos que lo originan.
+**2. El stock se calcula, no se guarda.** Una columna "stock" que se sobrescribe pierde la historia y acaba descuadrándose. El stock de cada lote se obtiene de sus movimientos: lo recibido o fabricado, menos lo consumido o servido, más los ajustes. Así nunca contradice a los datos que lo originan.
 
-**D3. Las correcciones son movimientos, no ediciones.** Si se rompe una caja, no se cambia el número: se registra un ajuste con motivo, empleado y fecha. Es el mismo principio que el contraasiento en contabilidad, y da a la vez auditoría, indicadores de mermas y el registro que pide el plan de autocontrol sanitario (APPCC).
+**3. Las correcciones son movimientos, no ediciones.** Si se rompe una caja, no se cambia el número: se registra un ajuste con motivo, empleado y fecha. Es el mismo principio que el contraasiento en contabilidad, y da a la vez auditoría, indicadores de mermas y el registro que pide el plan de autocontrol sanitario (APPCC).
 
-**D4. Las reglas de negocio viven en la base de datos.** Todo lo que puede expresarse con claves, `UNIQUE`, `NOT NULL` o `CHECK` va en el esquema, y lo que necesita mirar otras tablas (que no se sirva más de lo que hay, que un pedido vaya a una dirección de su cliente, que una máquina no esté en dos sitios a la vez) va en triggers y restricciones de PostgreSQL. Así la integridad no depende de que la aplicación esté bien programada.
+**4. Las reglas de negocio viven en la base de datos.** Todo lo que puede expresarse con claves, `UNIQUE`, `NOT NULL` o `CHECK` va en el esquema, y lo que necesita mirar otras tablas (que no se sirva más de lo que hay, que un pedido vaya a una dirección de su cliente, que una máquina no esté en dos sitios a la vez) va en triggers y restricciones de PostgreSQL. Así la integridad no depende de que la aplicación esté bien programada.
 
-**D5. Lo pactado se copia.** El precio de cada línea de pedido, la forma de pago del pedido y todos los datos de la factura (cliente, emisor, conceptos, IVA aplicado) se copian en el momento. Si mañana cambia el catálogo o sube el IVA, los documentos pasados siguen diciendo lo mismo. La factura, además, es inmutable: un error se corrige con una rectificativa.
+**5. Lo pactado se copia.** El precio de cada línea de pedido, la forma de pago del pedido y todos los datos de la factura (cliente, emisor, conceptos, IVA aplicado) se copian en el momento. Si mañana cambia el catálogo o sube el IVA, los documentos pasados siguen diciendo lo mismo. La factura, además, es inmutable: un error se corrige con una rectificativa.
 
-**D6. Lo planificado y lo realizado van por separado.** La orden de producción y su horario son una previsión que se cambia muchas veces; lo que pasó de verdad (en qué máquina, quién, con qué lotes) es un registro de trazabilidad que no debe cambiar. Separarlos permite además comparar el plan con la realidad.
+**6. Lo planificado y lo realizado van por separado.** La orden de producción y su horario son una previsión que se cambia muchas veces; lo que pasó de verdad (en qué máquina, quién, con qué lotes) es un registro de trazabilidad que no debe cambiar. Separarlos permite además comparar el plan con la realidad.
 
-**D7. Borrado lógico.** Clientes, productos, proveedores o usuarios no se borran: se desactivan. No se puede borrar algo que tiene historia (un cliente con pedidos, una materia prima usada en lotes).
+**7. Borrado lógico.** Clientes, productos, proveedores o usuarios no se borran: se desactivan. No se puede borrar algo que tiene historia (un cliente con pedidos, una materia prima usada en lotes).
 
 ## 9. Siguientes pasos y dudas
 
@@ -235,4 +235,4 @@ Dos detalles del paso a tablas que merece la pena señalar:
 
 - ¿El alcance es adecuado para un TFG, o conviene recortar algún módulo?
 - ¿Le parece bien poner tantas reglas de negocio en la base de datos, o prefiere que la memoria las justifique en el backend?
-- ¿La notación Chen es la adecuada para la memoria, o se espera otra (pata de gallo, UML)?
+- ¿La notación Chen es la adecuada para la memoria, debería añadir otra como pata de gallo o UML?
